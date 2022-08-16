@@ -8,3 +8,9 @@ abstract class TodosEvent extends Equatable {
 }
 
 class GetTodoList extends TodosEvent{}
+
+class AddTodo extends TodosEvent{
+  final TodoModel newTodo;
+
+  AddTodo({ required this.newTodo});
+}

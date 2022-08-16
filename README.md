@@ -1,6 +1,26 @@
 # todo
 
 A new Flutter project.
+This is a simple CRUD Todos app using Bloc StateManagement. I build this app for learn about developing an android application using Flutter because i interested with this. I also feel a lot of jobs opportunity in developing apps with Flutter. That's why i learn about this. Thank You.
+
+
+## Steps:
+-> Create all the ui first.
+-> Create the Models.
+-> Create the Resource to consume API.
+-> Create Bloc
+-> Edit Bloc State (Add the state that u want).
+-> Edit Bloc Event (Add the event that gonna happend to your app).
+-> Edit Bloc (Do the logic(set for every event)).
+-> Add BlocProvider in main.dart.
+-> Implement Bloc in your ui(BlocBuilder, BlocConsumer, BlocListener, BlocSelector).
+
+## What i learn?
+-> Design to Code.
+-> Fetching API.
+-> Form Validation.
+-> State Management for Every Event.
+-> and many more.. (i litle bit forgot btw 😅).
 
 ## Getting Started
 

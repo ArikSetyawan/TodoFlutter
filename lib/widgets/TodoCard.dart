@@ -34,7 +34,10 @@ class TodoCard extends StatelessWidget {
                   ],
                 ),
                 Spacer(),
-                Checkbox(value: true, activeColor: Colors.greenAccent  , onChanged: (bool? newValue){print("Clicked");})
+                IconButton(
+                  onPressed: () {print("Btn Delete Pressed");}, 
+                  icon: Icon(Icons.delete)
+                )
               ],
             ),
           ),

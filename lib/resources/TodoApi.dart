@@ -1,13 +1,16 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:todo/models/TodoModels.dart';
 
 class TodoApiProvider{
   final Dio _dio = Dio();
-  final String get_all_todo_url = "http://todo.mastya.my.id/api/todo";
+  final String TodoURL = "http://todo.mastya.my.id/api/todo";
 
-  Future<List<TodoModel>> getAllTodoList() async{
+  // Get All Todo List
+  Future getAllTodoList() async{
     try {
-      Response response = await _dio.get(get_all_todo_url);
+      Response response = await _dio.get(TodoURL);
       List<TodoModel> listoftodo = [];
       List data = response.data['data'];
       data.forEach((element) {
@@ -16,17 +19,32 @@ class TodoApiProvider{
       return listoftodo;
     } catch (error, stacktrace) {
       print("Exception occured: $error stackTrace: $stacktrace");
-      List<TodoModel> listoftodo = [];
-      return listoftodo;
+      return false;
     }
   }
 
+  // Add new Todo
+  Future<bool> AddNewTodo(TodoModel newTodo) async{
+    try {
+      Response response = await _dio.post(TodoURL, data: json.encode(newTodo.toJson()));
+      return true;
+    } catch (error, stacktrace) {
+      print("Exception occured: $error stackTrace: $stacktrace");
+      return false;
+    }
+  }
 }
+
+
 
 class TodoApiRepository{
   final _provider = TodoApiProvider();
 
-  Future<List<TodoModel>> getAllTodoList(){
+  Future getAllTodoList(){
     return _provider.getAllTodoList();
+  }
+
+  Future AddNewTodo(TodoModel newTodo){
+    return _provider.AddNewTodo(newTodo);
   }
 }

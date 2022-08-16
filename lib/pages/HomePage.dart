@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo/blocs/bloc/todos_bloc.dart';
 import 'package:todo/models/TodoModels.dart';
+import 'package:todo/pages/AddTodoPage.dart';
 import 'package:todo/resources/TodoApi.dart';
 import 'package:todo/widgets/TodoCard.dart';
 
@@ -41,10 +42,16 @@ class HomePage extends StatelessWidget {
                   },
                 ),
               ],
-            )
+            ),
           ],
         )
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) => AddTodoPage(),));
+        },
+        child: Icon(Icons.add),
+      )
     );
   }
 }
