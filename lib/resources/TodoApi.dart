@@ -33,6 +33,28 @@ class TodoApiProvider{
       return false;
     }
   }
+
+  // Delete Todo
+  Future DeleteTodo(int todo_id) async{
+    try {
+      Response response = await _dio.delete(TodoURL, queryParameters: {'todo_id':todo_id} );
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  // Update Todo
+  Future UpdateTodo(int todo_id, String todo, String description) async {
+    try {
+      var data = {"todo_id":todo_id,"todo":todo,"description":description};
+      Response response = await _dio.put(TodoURL, data: json.encode(data));
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
 }
 
 
@@ -46,5 +68,13 @@ class TodoApiRepository{
 
   Future AddNewTodo(TodoModel newTodo){
     return _provider.AddNewTodo(newTodo);
+  }
+
+  Future DeleteTodo(int todo_id){
+    return _provider.DeleteTodo(todo_id);
+  }
+
+  Future UpdateTodo(int todo_id, String todo, String description){
+    return _provider.UpdateTodo(todo_id, todo, description) ;
   }
 }

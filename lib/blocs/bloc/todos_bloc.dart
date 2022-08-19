@@ -40,5 +40,37 @@ class TodosBloc extends Bloc<TodosEvent, TodosState> {
         emit(TodoError("Failed to fetch data. is your device online?"));
       }
     });
+
+    // Delete Todo Bloc
+    on<DeleteTodo>((event, emit) async {
+      try {
+        emit(TodoLoading());
+        final deleteTodo = await _apiRepository.DeleteTodo(event.todo_id);
+        if (deleteTodo == true){
+          final TodoList = await _apiRepository.getAllTodoList();
+          emit(TodoLoaded(TodoList));
+        } else{
+          emit(TodoError("Server Error"));
+        }
+      } catch (e) {
+        emit(TodoError("Failed to fetch data. is your device online?"));
+      }
+    });
+
+    // Edit Todo Bloc
+    on<EditTodo>((event, emit) async {
+      try {
+        emit(TodoLoading());
+        final editTodo = await _apiRepository.UpdateTodo(event.todo_id, event.todo, event.description);
+        if (editTodo == true){
+          final TodoList = await _apiRepository.getAllTodoList();
+          emit(TodoLoaded(TodoList));
+        } else {
+          emit(TodoError("Server Error"));
+        }
+      } catch (e) {
+        emit(TodoError("Failed to fetch data. is your device online?"));
+      }
+    });
   }
 }
